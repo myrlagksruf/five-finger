@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Five Finger</title>
+    <meta
+      name="description"
+      content="MediaPipe 기반 멀티핸드 손가락 카운팅 웹 앱"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="hero">
+        <div>
+          <p class="eyebrow">MediaPipe Hand Tracking</p>
+          <h1>Five Finger</h1>
+          <p class="hero-copy">
+            카메라에서 여러 손을 동시에 추적하고, 손 프레임과 랜드마크를
+            오버레이로 표시한 뒤 총 펼쳐진 손가락 수를 집계한다.
+          </p>
+        </div>
+        <div class="controls">
+          <button id="camera-toggle" class="primary-button" type="button">
+            카메라 시작
+          </button>
+          <p id="status-message" class="status-message">
+            모델 로딩 대기 중
+          </p>
+        </div>
+      </header>
+
+      <main class="dashboard">
+        <section class="stats-panel">
+          <article class="stat-card accent">
+            <span class="stat-label">총 펼쳐진 손가락</span>
+            <strong id="total-fingers" class="stat-value">0</strong>
+          </article>
+          <article class="stat-card">
+            <span class="stat-label">인식된 손</span>
+            <strong id="total-hands" class="stat-value">0</strong>
+          </article>
+          <article class="stat-card">
+            <span class="stat-label">처리 FPS</span>
+            <strong id="fps-value" class="stat-value">0</strong>
+          </article>
+        </section>
+
+        <section class="viewer-panel">
+          <div class="viewer-header">
+            <div>
+              <p class="viewer-title">Live Camera</p>
+              <p class="viewer-subtitle">
+                손 프레임, 랜드마크, 손별 카운트를 실시간으로 표시
+              </p>
+            </div>
+          </div>
+
+          <div class="camera-stage">
+            <div class="video-stack">
+              <video id="camera" autoplay muted playsinline></video>
+              <canvas id="overlay"></canvas>
+            </div>
+          </div>
+        </section>
+
+        <section class="detail-panel">
+          <div class="detail-header">
+            <p class="viewer-title">Per-hand Breakdown</p>
+            <p class="viewer-subtitle">
+              왼손/오른손 추정 결과와 손별 펼쳐진 손가락 수
+            </p>
+          </div>
+          <div id="hand-list" class="hand-list">
+            <p class="empty-state">카메라를 시작하면 손별 결과가 표시된다.</p>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>

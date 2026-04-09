@@ -1,0 +1,13 @@
+{
+  "name": "five-finger",
+  "version": "1.0.0",
+  "description": "GitHub Pages project for five-finger",
+  "homepage": "https://myrlagksruf.github.io/five-finger/",
+  "scripts": {
+    "check": "node --check app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module"
+}

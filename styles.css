@@ -1,0 +1,351 @@
+:root {
+  color-scheme: dark;
+  --bg: #07111a;
+  --bg-accent: #0e2230;
+  --panel: rgba(7, 17, 26, 0.78);
+  --panel-strong: rgba(10, 26, 39, 0.94);
+  --border: rgba(140, 185, 210, 0.18);
+  --text: #eff7fb;
+  --muted: #94aebe;
+  --cyan: #3fe0c5;
+  --orange: #ff9e4f;
+  --pink: #ff5d73;
+  --shadow: 0 24px 80px rgba(0, 0, 0, 0.35);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Space Grotesk", sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(circle at top left, rgba(63, 224, 197, 0.18), transparent 24%),
+    radial-gradient(circle at top right, rgba(255, 158, 79, 0.16), transparent 22%),
+    linear-gradient(160deg, #02060a 0%, #07111a 42%, #0c1f2c 100%);
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 36px 36px;
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.65), transparent);
+}
+
+.app-shell {
+  width: min(1240px, calc(100vw - 32px));
+  margin: 0 auto;
+  padding: 32px 0 48px;
+}
+
+.hero,
+.stats-panel,
+.viewer-panel,
+.detail-panel {
+  position: relative;
+  border: 1px solid var(--border);
+  background: var(--panel);
+  backdrop-filter: blur(18px);
+  box-shadow: var(--shadow);
+}
+
+.hero,
+.viewer-panel,
+.detail-panel {
+  border-radius: 28px;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(280px, 0.8fr);
+  gap: 24px;
+  padding: 28px;
+  overflow: hidden;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: auto -80px -80px auto;
+  width: 220px;
+  height: 220px;
+  background: radial-gradient(circle, rgba(63, 224, 197, 0.22), transparent 70%);
+}
+
+.eyebrow,
+.stat-label,
+.viewer-subtitle,
+.status-message,
+.empty-state {
+  font-family: "IBM Plex Mono", monospace;
+}
+
+.eyebrow {
+  margin: 0 0 8px;
+  color: var(--cyan);
+  font-size: 0.82rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(2.8rem, 5vw, 5rem);
+  line-height: 0.95;
+}
+
+.hero-copy {
+  max-width: 62ch;
+  margin: 16px 0 0;
+  color: var(--muted);
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 20px;
+  border-radius: 24px;
+  background: var(--panel-strong);
+}
+
+.primary-button {
+  border: 0;
+  border-radius: 999px;
+  padding: 16px 20px;
+  font: inherit;
+  font-weight: 700;
+  color: #04131d;
+  background: linear-gradient(120deg, var(--cyan), #8affea);
+  cursor: pointer;
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    opacity 180ms ease;
+}
+
+.primary-button:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 32px rgba(63, 224, 197, 0.28);
+}
+
+.primary-button:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+.status-message {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.dashboard {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(320px, 0.7fr);
+  gap: 24px;
+  margin-top: 24px;
+}
+
+.stats-panel {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  border-radius: 28px;
+  overflow: hidden;
+  background: rgba(140, 185, 210, 0.12);
+}
+
+.stat-card {
+  min-height: 140px;
+  padding: 24px;
+  background: var(--panel-strong);
+}
+
+.stat-card.accent {
+  background:
+    radial-gradient(circle at top right, rgba(255, 158, 79, 0.18), transparent 40%),
+    linear-gradient(180deg, rgba(63, 224, 197, 0.14), rgba(10, 26, 39, 0.96));
+}
+
+.stat-label {
+  display: block;
+  color: var(--muted);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.stat-value {
+  display: block;
+  margin-top: 18px;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  line-height: 1;
+}
+
+.viewer-panel,
+.detail-panel {
+  padding: 24px;
+}
+
+.viewer-header,
+.detail-header {
+  margin-bottom: 18px;
+}
+
+.viewer-title {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.viewer-subtitle {
+  margin: 8px 0 0;
+  color: var(--muted);
+  font-size: 0.84rem;
+  line-height: 1.5;
+}
+
+.camera-stage {
+  border-radius: 22px;
+  padding: 12px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.04)),
+    var(--bg-accent);
+}
+
+.video-stack {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  border-radius: 18px;
+  background:
+    linear-gradient(135deg, rgba(63, 224, 197, 0.08), rgba(255, 158, 79, 0.08)),
+    #02060a;
+}
+
+#camera,
+#overlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+#camera {
+  object-fit: cover;
+  transform: scaleX(-1);
+}
+
+#overlay {
+  pointer-events: none;
+  transform: scaleX(-1);
+}
+
+.detail-panel {
+  align-self: start;
+}
+
+.hand-list {
+  display: grid;
+  gap: 14px;
+}
+
+.hand-card,
+.empty-state {
+  border-radius: 20px;
+  padding: 16px;
+  background: var(--panel-strong);
+  border: 1px solid rgba(140, 185, 210, 0.1);
+}
+
+.empty-state {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.hand-card {
+  display: grid;
+  gap: 10px;
+}
+
+.hand-card-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.hand-name {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.hand-score {
+  color: var(--muted);
+  font-size: 0.84rem;
+}
+
+.finger-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.finger-pill {
+  padding: 10px 8px;
+  border-radius: 14px;
+  text-align: center;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.75rem;
+  color: var(--muted);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.finger-pill.active {
+  color: #04131d;
+  background: linear-gradient(120deg, var(--orange), #ffd04a);
+}
+
+@media (max-width: 980px) {
+  .hero,
+  .dashboard {
+    grid-template-columns: 1fr;
+  }
+
+  .stats-panel {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .app-shell {
+    width: min(100vw - 20px, 1240px);
+    padding-top: 20px;
+  }
+
+  .hero,
+  .viewer-panel,
+  .detail-panel {
+    padding: 18px;
+    border-radius: 22px;
+  }
+
+  .finger-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
